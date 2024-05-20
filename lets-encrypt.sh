@@ -42,7 +42,7 @@ if [ -n "$(aws s3 ls $folder)" ]; then
     sudo rm -rf /etc/letsencrypt/*
     sudo aws s3 cp ${folder}backup.tar.gz /tmp
     sudo tar -xzvf /tmp/backup.tar.gz --directory /
-    sudo chmod -R root:root /etc/letsencrypt
+    sudo chown -R root:root /etc/letsencrypt
 
     if [ "$test_mode" = true ]; then
         sudo certbot -n -d ${domain} --nginx --agree-tos --email ${contact} --reinstall --redirect --expand --allow-subset-of-names --test-cert
