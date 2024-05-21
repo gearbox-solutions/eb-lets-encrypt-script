@@ -1,6 +1,12 @@
 # AWS Elastic Beanstalk Let's Encrypt SSL Certificates
 
-Let's Encrypt SSL certificates are a great way to secure your website for free, and the automated renewal process is very convenient. However, the process of scripting their deployment and renewal can be challenging for single-instance Elastic Beanstalk deployments. 
+## Introduction
+
+Let's Encrypt SSL certificates are a great way to secure your website for free, and the automated renewal process is very convenient. However, the process of scripting their deployment and renewal can be challenging for single-instance Elastic Beanstalk deployments.
+
+This script helps you automate the process of generating and renewing Let's Encrypt SSL certificates for your Elastic Beanstalk environment. The script uses Certbot to generate the certificates and stores them in an S3 bucket. When a new instance is deployed, the script will retrieve the certificates from S3 and configure the instance to use them.
+
+## Why use this?
 
 Elastic Beanstalk regularly destroys and recreates EC2 instances as part of the instance security maintenance and app deployment processes. This means that the certificates stored on the instance will be lost when the instance is destroyed. If you force-fetch a new cert from LE you run the risk of hitting your certificate limit and being stuck without a valid certificate. This script automates the process of renewing and storing the certificates in S3 for use in Elastic Beanstalk when new instances are deployed.
 
