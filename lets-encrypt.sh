@@ -1,14 +1,23 @@
 #!/bin/bash
-# this must be done in postdeploy so that nginx config doesn't get overwritten by Elastic Beanstalk
+# this must be done in the Elastic Beanstalk postdeploy hook so that nginx config doesn't get overwritten by Elastic Beanstalk
 
 # ---- Configuration ----
-# domain string domains used by certbot (comma separated)
-# contact string email address for certbot
-# bucket string s3 bucket name
-# test_mode boolean true if test mode cert is desired
-# environment string environment name
+#domain - The domain for which you want to generate the certificate (comma separated for multiple domains) ex: `myapp.acme.com,myapp-staging.acme.com`
+#contact - The email address to use for Let's Encrypt
+#bucket - The S3 bucket to use for storing the certificates
+#test_mode -  Set to `false` to use the Let's Encrypt production server and get a valid certificate. Test certificates are not trusted by browsers, but are useful for testing the deployment.
+#environment - The Elastic Beanstalk environment name (test, production, etc.)
+#
+# Any of these values can also be configured in your EB environment variables rather than specified here. Settings here will override environment variables.
+
+domain="my-app.company.com"
+contact="contact@company.com"
+bucket="my-ssl-certificates-bucket"
+test_mode=true
+environment="production"
 # -----------------------
 
+# increase server_names_hash_bucket_size to 128 to handle long domain names in nginx
 sed -i 's/http {/http {\n    server_names_hash_bucket_size 128;/' /etc/nginx/nginx.conf
 
 #add cron job

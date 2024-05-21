@@ -21,9 +21,11 @@ Make the following changes to the script to match your environment:
 domain - The domain for which you want to generate the certificate (comma separated for multiple domains) ex: `myapp.acme.com,myapp-staging.acme.com`
 contact - The email address to use for Let's Encrypt
 bucket - The S3 bucket to use for storing the certificates
-test_mode - Set to `true` to use the Let's Encrypt staging server
+test_mode -  Set to `false` to use the Let's Encrypt production server and get a valid certificate. Test certificates are not trusted by browsers, but are useful for testing the deployment.
 environment - The Elastic Beanstalk environment name (test, production, etc.)
 ```
+Any of these values can also be configured in your EB environment variables rather than specified here. Settings here will override environment variables.
+
 
 ### 3. Configure your EB EC2 role to allow access to S3
 
