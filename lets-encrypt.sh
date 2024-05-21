@@ -1,5 +1,5 @@
 #!/bin/bash
-# this must be done in the Elastic Beanstalk postdeploy hook so that nginx config doesn't get overwritten by Elastic Beanstalk
+# this must be run in the Elastic Beanstalk postdeploy hook so that nginx config doesn't get overwritten by Elastic Beanstalk
 
 # ---- Configuration ----
 #domain - The domain for which you want to generate the certificate (comma separated for multiple domains) ex: `myapp.acme.com,myapp-staging.acme.com`
